@@ -1,12 +1,14 @@
 import { createContext, useContext, useState } from "react";
+
 const API = "https://fsa-jwt-practice.herokuapp.com";
+
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState();
   const [location, setLocation] = useState("GATE");
 
-  // Sending credentials to receive a token //
+  /** Sends credentials to the API to receive a token. */
   const signup = async (credentials) => {
     try {
       const response = await fetch(API + "/signup", {
@@ -22,7 +24,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // Sending tokens to Authenticate the user //
+  /** Sends the token to the API to authenticate the user. */
   const authenticate = async () => {
     try {
       if (!token) throw Error("No token found.");
